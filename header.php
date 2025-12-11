@@ -967,6 +967,201 @@
             display: inline-block;
         }
 
+        /* 评论列表样式 */
+        .comments-list, .comment-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .comment {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            transition: all var(--transition-fast);
+        }
+
+        .comment:hover {
+            border-color: var(--highlight-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 192, 244, 0.15);
+        }
+
+        /* 评论者头像 */
+        .comment-author-avatar {
+            float: left;
+            margin-right: var(--spacing-lg);
+        }
+
+        .comment-author-avatar img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+        }
+
+        /* 评论内容 */
+        .comment-content {
+            overflow: hidden;
+        }
+
+        /* 评论元信息 */
+        .comment-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .comment-author, .comment-author-name {
+            color: var(--highlight-color);
+            font-weight: bold;
+            font-size: var(--font-size-normal);
+        }
+
+        .comment-date {
+            color: var(--text-muted);
+            font-size: var(--font-size-small);
+        }
+
+        .comment-reply {
+            margin-left: auto;
+        }
+
+        .comment-reply a {
+            color: var(--highlight-color);
+            font-size: var(--font-size-small);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .comment-reply a:hover {
+            color: #8ac4f7;
+        }
+
+        /* 评论正文 */
+        .comment-text {
+            color: var(--text-primary);
+            font-size: var(--font-size-normal);
+            line-height: 1.6;
+            margin: var(--spacing-md) 0 0 0;
+        }
+
+        /* 评论子列表 */
+        .comment-children {
+            margin-left: var(--spacing-xl);
+            margin-top: var(--spacing-lg);
+        }
+
+        /* 评论表单样式 */
+        .comments-form, #respond {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .comments-form h3, #respond h3 {
+            color: var(--text-primary);
+            font-size: var(--font-size-large);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group label, .comment-form label {
+            display: block;
+            color: var(--text-primary);
+            font-size: var(--font-size-normal);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .form-control, .comment-form input[type="text"], .comment-form input[type="email"], .comment-form input[type="url"], .comment-form textarea {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-primary);
+            font-size: var(--font-size-normal);
+            transition: all var(--transition-fast);
+        }
+
+        .form-control:focus, .comment-form input[type="text"]:focus, .comment-form input[type="email"]:focus, .comment-form input[type="url"]:focus, .comment-form textarea:focus {
+            outline: none;
+            border-color: var(--highlight-color);
+            box-shadow: 0 0 0 1px var(--highlight-color);
+        }
+
+        textarea.form-control, .comment-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit, .comment-form .submit {
+            text-align: right;
+        }
+
+        .submit-btn, .comment-form .submit input[type="submit"] {
+            padding: var(--spacing-sm) var(--spacing-xl);
+            background-color: var(--highlight-color);
+            border: none;
+            border-radius: var(--border-radius-sm);
+            color: var(--accent-color);
+            font-size: var(--font-size-normal);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .submit-btn:hover, .comment-form .submit input[type="submit"]:hover {
+            background-color: #8ac4f7;
+        }
+
+        /* 无评论状态 */
+        .no-comment, .no-comments {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .no-comment p, .no-comments p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* 评论分页 */
+        .comments-pagination {
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .comment-nav {
+            display: inline-flex;
+            gap: var(--spacing-sm);
+        }
+
+        .comment-nav a {
+            padding: var(--spacing-xs) var(--spacing-md);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .comment-nav a:hover {
+            border-color: var(--highlight-color);
+            background-color: var(--hover-bg);
+        }
+
         /* 分类页样式 - Steam风格 */
         
         /* 分类页头部 */
