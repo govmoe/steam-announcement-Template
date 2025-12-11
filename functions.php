@@ -66,6 +66,12 @@ function themeInit() {
  * @param Typecho_Widget_Abstract_Comments $comments 评论对象
  * @param string $options 评论选项
  */
+/**
+ * 自定义嵌套评论渲染函数
+ * 
+ * @param Typecho_Widget_Abstract_Comments $comments 评论对象
+ * @param string $options 评论选项
+ */
 function threadedComments($comments, $options) {
     $commentClass = '';
     if ($comments->authorId) {
@@ -79,12 +85,8 @@ function threadedComments($comments, $options) {
     $commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent';
     ?>
     <li id="li-<?php $comments->theId(); ?>" class="comment<?php 
-        if ($comments->levels > 0) {
-            echo ' comment-child';
-            $comments->levelsAlt(' comment-level-odd', ' comment-level-even');
-        } else {
-            echo ' comment-parent';
-        }
+        echo $commentLevelClass;
+        $comments->levelsAlt(' comment-level-odd', ' comment-level-even');
         $comments->alt(' comment-odd', ' comment-even');
         echo $commentClass;
     ?>">
@@ -96,8 +98,12 @@ function threadedComments($comments, $options) {
                 <div class="comment-meta">
                     <span class="comment-author"><?php $comments->author(); ?></span>
                     <span class="comment-date"><?php $comments->date('Y-m-d H:i'); ?></span>
-                    <span class="comment-reply">
-                        <?php $comments->reply(); ?>
+                    <span class="comment-actions">
+                        <?php $comments->reply('回复'); ?>
+                        <?php if($comments->ownerId == $comments->authorId || $this->user->hasLogin()): ?>
+                            <?php $comments->edit('编辑'); ?>
+                            <?php $comments->delete('删除'); ?>
+                        <?php endif; ?>
                     </span>
                 </div>
                 <div class="comment-text">
@@ -113,6 +119,9 @@ function threadedComments($comments, $options) {
     </li>
     <?php
 }
+
+// 注册评论回调函数
+typecho_Plugin::factory('Widget_Comments_Archive')->threadedComments = 'threadedComments';
 
 /**
  * 截取文章摘要
