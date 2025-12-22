@@ -4,7 +4,7 @@
  * 
  * @package SteamAnnouncement
  * @author hatch_blod
- * @version 0.1.3-BETA
+ * @version 0.1.3-dev
  * @link https://blog.002.hk
  */
 
