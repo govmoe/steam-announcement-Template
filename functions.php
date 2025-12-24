@@ -78,7 +78,7 @@ function threadedComments($comments, $options) {
     
     $commentLevelClass = $comments->_levels > 0 ? ' comment-child' : ' comment-parent';
     ?>
-    <li id="li-<?php $comments->theId(); ?>" class="comment<?php 
+<li id="li-<?php $comments->theId(); ?>" class="comment<?php 
     if ($comments->_levels > 0) {
         echo ' comment-child';
         $comments->levelsAlt(' comment-level-odd', ' comment-level-even');
@@ -88,34 +88,33 @@ function threadedComments($comments, $options) {
     $comments->alt(' comment-odd', ' comment-even');
     echo $commentClass;
     ?>">
-        <div id="<?php $comments->theId(); ?>" class="comment-body">
-            <div class="comment-author-avatar">
-                <?php $comments->gravatar('48', ''); ?>
+    <div id="<?php $comments->theId(); ?>" class="comment-body">
+        <div class="comment-author-avatar">
+            <?php $comments->gravatar('48', ''); ?>
+        </div>
+        <div class="comment-content">
+            <div class="comment-meta">
+                <span class="comment-author"><?php $comments->author(); ?></span>
+                <span class="comment-date"><?php $comments->date('Y-m-d H:i'); ?></span>
+                <span class="comment-actions">
+                    <?php $comments->reply(); ?>
+                    <?php if($comments->status=='approved'): ?>
+                    <?php $comments->edit(); ?>
+                    <?php endif; ?>
+                </span>
             </div>
-            <div class="comment-content">
-                <div class="comment-meta">
-                    <span class="comment-author"><?php $comments->author(); ?></span>
-                    <span class="comment-date"><?php $comments->date('Y-m-d H:i'); ?></span>
-                    <span class="comment-actions">
-                        <?php $comments->reply(); ?>
-                        <?php if($comments->status=='approved'): ?>
-                            <?php $comments->edit(); ?>
-                        <?php endif; ?>
-                        <?php $comments->delete(); ?>
-                    </span>
-                </div>
-                <div class="comment-text">
-                    <?php $comments->content(); ?>
-                </div>
+            <div class="comment-text">
+                <?php $comments->content(); ?>
             </div>
         </div>
-        <?php if ($comments->children) { ?>
-        <div class="comment-children">
-            <?php $comments->threadedComments($options); ?>
-        </div>
-        <?php } ?>
-    </li>
-    <?php
+    </div>
+    <?php if ($comments->children) { ?>
+    <div class="comment-children">
+        <?php $comments->threadedComments($options); ?>
+    </div>
+    <?php } ?>
+</li>
+<?php
 }
 
 /**
