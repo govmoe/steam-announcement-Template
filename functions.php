@@ -317,3 +317,40 @@ function customPageNav($prev = '上一页', $next = '下一页', $splitPage = 1,
     
     return $html;
 }
+
+//文章缩略图函数
+function showThumbnail($widget,$type=0)
+{ 
+    $random = Helper::options()->themeUrl.'/img/none.jpg';//这里时默认缩略图
+    $pattern = '/\<img.*?\ssrc\s*=\s*\"([^"\']+)\"[^>]*>/i';
+    $attach = $widget->widget('Widget_Contents_Attachment_Related@' . $widget->cid . '-' . uniqid(), array(
+            'parentId'  => $widget->cid,'limit'     => 1,'offset'    => 0))->attachment;
+    $t=@preg_match_all($pattern, $widget->markdown($widget->text), $thumbUrl);
+    $img=$random;
+
+//兼容thumb文章自定义封面插件
+   $name = md5($widget->cid);
+   $file1 = ".".__TYPECHO_PLUGIN_DIR__."/Thumb/uploads/".$name.'.webp';
+   $file2 = ".".__TYPECHO_PLUGIN_DIR__."/Thumb/uploads/".$name.'.jpg';
+   if(file_exists($file1)){
+        $img=__TYPECHO_PLUGIN_DIR__."/Thumb/uploads/".$name.'.webp?'.filemtime($file1);
+    }
+   elseif(file_exists($file2)){
+        $img=__TYPECHO_PLUGIN_DIR__."/Thumb/uploads/".$name.'.jpg?'.filemtime($file2);
+    }
+    
+//兼容常见自定义字段设置
+elseif($widget->fields->img){$img=$widget->fields->img;}
+elseif($widget->fields->thumb){$img=$widget->fields->thumb;}
+elseif($widget->fields->thumbnail){$img=$widget->fields->thumbnail;}
+    
+elseif ($t && strpos($thumbUrl[1][0],'icon.png') == false && strpos($thumbUrl[1][0],'alipay') == false && strpos($thumbUrl[1][0],'wechat') == false) {$img = $thumbUrl[1][0];}//从文章中获取封面
+  elseif (@$attach->isImage) {$img=$attach->url;}//从附件中获取封面
+
+  if($type==0){
+  if($img==$random){echo $img;}else{echo $img.Helper::options()->thumbnail;}//输出封面图
+  }else{
+   if($img==$random){return $img;}else{return $img.Helper::options()->thumbnail;}//输出封面图     
+  }
+  
+}

@@ -92,12 +92,7 @@ $this->need('header.php');
                     <article class="announcement-card">
                         <!-- 公告缩略图 -->
                         <div class="announcement-thumbnail">
-                            <?php
-                                // 获取文章封面图，默认使用占位图
-                                $thumbnail = $this->fields->thumbnail;
-                                $thumbnailUrl = $thumbnail ? $thumbnail : 'https://via.placeholder.com/240x135';
-                            ?>
-                            <img src="<?php echo $thumbnailUrl; ?>" alt="<?php $this->title() ?>">
+                            <img src="<?php showThumbnail($this); ?>" alt="<?php $this->title() ?>">
                         </div>
                         
                         <!-- 公告内容 -->
